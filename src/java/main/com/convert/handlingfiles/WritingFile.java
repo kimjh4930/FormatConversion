@@ -12,7 +12,9 @@ public class WritingFile {
 
 		try {
 
-			String convertPath = path + "/" + "convert" + "/";
+			String convertPath = path + "convert" + "/";
+			
+			System.out.println(convertPath);
 			
 			File directory = new File(convertPath);
 
@@ -20,7 +22,7 @@ public class WritingFile {
 				directory.mkdirs();
 			}
 
-			File file = new File(convertPath + "convert" +fileName);
+			File file = new File(convertPath + fileName);
 
 			FileWriter fw = new FileWriter(file, true);
 

@@ -20,21 +20,22 @@ public class AppMain {
 		
 		List<String> fileList = new ArrayList<>();
 		
-		String path = "./";
+		String path = "../result/stream/";
 		String rawDataRegex = String.format(".+\n.+\n.+\n=========================");
 		
 		//fileList에 
 		fileList = readingFile.loadFileList(path);
-		System.out.println("fileList.get(0) : " + fileList.get(0));
-
+		
 		for(int i=0; i<fileList.size(); i++){
 			List<AfterDataType> afterDataList = new ArrayList<>();
 			List<String> dataList = new ArrayList<>();
 			BeforeDataType beforeData = new BeforeDataType();
-			String content = readingFile.readOriginalResult(fileList.get(i));
+			
+			System.out.println(path + fileList.get(i));
+			
+			String content = readingFile.readOriginalResult(path + fileList.get(i));
 			
 			dataList = processingData.getDataListFromRegex(content, rawDataRegex);
-			
 			for(int j=0; j<dataList.size(); j++){
 				
 				beforeData = processingData.extractData(dataList.get(j));

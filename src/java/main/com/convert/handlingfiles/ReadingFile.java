@@ -39,7 +39,7 @@ public class ReadingFile {
 			File file = contentList[i];
 			
 			if(  file.getName().contains(".txt") ){
-				fileList.add(file.toString());
+				fileList.add(file.getName());
 			}
 		}
 		
