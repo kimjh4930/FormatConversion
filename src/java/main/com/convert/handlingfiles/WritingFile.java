@@ -8,11 +8,11 @@ import com.convert.domain.AfterDataType;
 
 public class WritingFile {
 
-	public void writeToFile(String path, List<AfterDataType> dataList, String fileName) {
+	public void writeToFile(String path, AfterDataType data, String directoryName, String fileName) {
 
 		try {
 
-			String convertPath = path + "convert" + "/";
+			String convertPath = path + directoryName + "/";
 			
 			System.out.println(convertPath);
 			
@@ -25,10 +25,13 @@ public class WritingFile {
 			File file = new File(convertPath + fileName);
 
 			FileWriter fw = new FileWriter(file, true);
-
-			for(int i=0; i<dataList.size(); i++){
-				fw.write(dataList.get(i).toString() + "\n");
+			
+			if("cpufreq".equals(directoryName)){
+				fw.write(data.toStringSortedByDevFreq() + "\n");
+			}else if("devfreq".equals(directoryName)){
+				fw.write(data.toStringSotredByCpuFreq() + "\n");
 			}
+			
 			fw.flush();
 
 			fw.close();

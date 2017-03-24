@@ -5,16 +5,28 @@ import lombok.Data;
 @Data
 public class AfterDataType {
 	
-	private int frequency;
+	private int devFrequency;
+	private int cpuFrequency;
 	private Double execTime;
 	private Double wattHour;
 	private Double jouleSecond;
 	private Double watt;
 	
-	@Override
-	public String toString(){
+	
+	public String toStringSortedByDevFreq(){
 		
-		return 	this.getFrequency() + "," +
+		return	this.getCpuFrequency() + "," +
+				this.getDevFrequency() + "," +
+				this.getExecTime() + "," +
+				this.getWattHour() + "," +
+				this.getJouleSecond() + "," +
+				this.getWatt();
+	}
+	
+	public String toStringSotredByCpuFreq(){
+		
+		return 	this.getDevFrequency() + "," +
+				this.getCpuFrequency() + "," +
 				this.getExecTime() + "," +
 				this.getWattHour() + "," +
 				this.getJouleSecond() + "," +

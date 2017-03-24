@@ -57,7 +57,7 @@ public class ProcessingData {
 		minuteResult = this.getDataStringFromRegex(rawData, minuteRegex).toString().replaceAll("m", "");
 		secondResult = this.getDataStringFromRegex(rawData, secondRegex).toString().replaceAll("m", "");
 		
-		dataType.setFrequency(Integer.parseInt(frequencyResult));
+		dataType.setDevFrequency(Integer.parseInt(frequencyResult));
 		dataType.setWattHour(Double.parseDouble(whResult));
 		dataType.setExeTime(Double.parseDouble(minuteResult)*60 + Double.parseDouble(secondResult));
 		
@@ -75,10 +75,11 @@ public class ProcessingData {
 		
 		AfterDataType afterData = new AfterDataType();
 		
-		afterData.setFrequency(beforeData.getFrequency());
+		afterData.setCpuFrequency(beforeData.getCpuFrequency());
+		afterData.setDevFrequency(beforeData.getDevFrequency());
 		afterData.setExecTime(beforeData.getExeTime());
 		afterData.setWattHour(beforeData.getWattHour());
-		afterData.setJouleSecond(beforeData.getWattHour() * 3600 * beforeData.getWattHour());
+		afterData.setJouleSecond(beforeData.getWattHour() * 3600 * beforeData.getExeTime());
 		afterData.setWatt(beforeData.getWattHour() * 3600 / beforeData.getExeTime());
 		
 		return afterData;
