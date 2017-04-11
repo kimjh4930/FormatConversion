@@ -27,8 +27,13 @@ public class WritingFile {
 			FileWriter fw = new FileWriter(file, true);
 			
 			if("cpufreq".equals(directoryName)){
-				fw.write(data.toStringSortedByDevFreq() + "\n");
+				//fw.write(data.toStringSortedByDevFreq() + "\n");
+				//nexus
+				fw.write(data.toStringSortedByDevFreqNexus() + "\n");
 			}else if("devfreq".equals(directoryName)){
+				
+				//fw.write(data.toStringSotredByCpuFreq() + "\n");
+				//nexus
 				fw.write(data.toStringSotredByCpuFreq() + "\n");
 			}
 			

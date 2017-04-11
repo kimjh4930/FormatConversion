@@ -32,5 +32,19 @@ public class AfterDataType {
 				this.getJouleSecond() + "," +
 				this.getWatt();
 	}
+	
+	public String toStringSortedByDevFreqNexus(){
+		
+		return	this.getCpuFrequency() + "," +
+				this.getDevFrequency() + "," +
+				this.getExecTime();
+	}
+
+	public String toStringSotredByCpuFreqNexus(){
+	
+		return 	this.getDevFrequency() + "," +
+				this.getCpuFrequency() + "," +
+				this.getExecTime();
+	}
 
 }

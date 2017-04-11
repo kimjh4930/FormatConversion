@@ -19,8 +19,10 @@ public class AppMain {
 		
 		List<String> cpuFrequency = new ArrayList<>();
 		
-		String path = "../result/iozone/";
+		String path = "../result/";
 		String rawDataRegex = String.format(".+\n.+\n.+\n=========================");
+		
+		String nexusResultRegex = String.format("\\d.+\n\\d.+\n.+\\sreal");
 		
 		//fileList에 
 		cpuFrequency = readingFile.loadFileList(path);
@@ -43,13 +45,16 @@ public class AppMain {
 			
 			for(int j=0; j<dataList.size(); j++){
 				
-				beforeData = processingData.extractData(dataList.get(j));
-				beforeData.setCpuFrequency(Integer.parseInt(cpuFrequency.get(i)));
+				beforeData = processingData.extractDataNexus(dataList.get(j));
+				//beforeData.setCpuFrequency(Integer.parseInt(cpuFrequency.get(i)));
 				
 				afterDataList.add(processingData.makeOutputFormat(beforeData));
 				
 			}
-			System.out.println(afterDataList);
+			
+			for(int j=0; j<afterDataList.size(); j++){
+				System.out.println(afterDataList.get(j));
+			}
 
 			for(int j=0; j < afterDataList.size(); j++){
 				writingFile.writeToFile(path, afterDataList.get(j), "cpufreq", cpuFrequency.get(i)+".txt");
