@@ -107,5 +107,44 @@ public class ProcessingData {
 		
 		return dataType;
 	}
+	
+	public BeforeDataType extractPerfResult(String rawData){
+		
+		BeforeDataType dataType = new BeforeDataType();
+		
+		String cpuFreq, devFreq;
+		String cycle, instruction;
+		
+		String cpuFreqRegex = String.format("\\d{6,7}\n");
+		String devFreqRegex = String.format("\\d{3,5}\n");
+		String cycleRegex = String.format("\\d+\\scycles");
+		String instructionRegex = String.format("\\d+\\sinstructions");
+		
+		cpuFreq = this.getDataStringFromRegex(rawData, cpuFreqRegex).toString().replaceAll("\n", "");
+		devFreq = this.getDataStringFromRegex(rawData, devFreqRegex).toString().replaceAll("\n", "");
+		cycle = this.getDataStringFromRegex(rawData, cycleRegex).toString().replaceAll("\\scycles", "");
+		instruction = this.getDataStringFromRegex(rawData, instructionRegex).toString().replaceAll("\\sinstructions", "");
+		
+		dataType.setCpuFrequency(Integer.parseInt(cpuFreq));
+		dataType.setDevFrequency(Integer.parseInt(devFreq));
+		dataType.setCycle(Long.parseLong(cycle));
+		dataType.setInstruction(Long.parseLong(instruction));
+		
+		return dataType;
+	}
+	
+	public AfterDataType makeOutputPerfFormat(BeforeDataType beforeData) {
+
+		AfterDataType afterData = new AfterDataType();
+
+		afterData.setCpuFrequency(beforeData.getCpuFrequency());
+		afterData.setDevFrequency(beforeData.getDevFrequency());
+		afterData.setExecTime(beforeData.getExeTime());
+		afterData.setCycle(beforeData.getCycle());
+		afterData.setInstruction(beforeData.getInstruction());
+		afterData.setCyclesPerInstruction((double)beforeData.getCycle()/beforeData.getInstruction());
+
+		return afterData;
+	}
 
 }

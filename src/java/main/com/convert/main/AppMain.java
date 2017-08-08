@@ -19,15 +19,16 @@ public class AppMain {
 		
 		List<String> cpuFrequency = new ArrayList<>();
 		
-		String path = "../result/";
+		String path = "../triad/";
 		String rawDataRegex = String.format(".+\n.+\n.+\n=========================");
 		
 		String nexusResultRegex = String.format("\\d.+\n\\d.+\n.+\\sreal");
+		String nexusPerfResultRegex = String.format("\\d.+\n\\d.+\n.+\n.+instructions");
 		
 		//fileList에 
 		cpuFrequency = readingFile.loadFileList(path);
 		
-		System.out.println(cpuFrequency);
+		//System.out.println(cpuFrequency);
 		
 		for(int i=0; i<cpuFrequency.size(); i++){
 		//for(int i=0; i<3; i++){
@@ -39,23 +40,20 @@ public class AppMain {
 			
 			String content = readingFile.readOriginalResult(path + cpuFrequency.get(i) + ".txt");
 			
-			dataList = processingData.getDataListFromRegex(content, rawDataRegex);
-			
-			System.out.println(dataList);
+			dataList = processingData.getDataListFromRegex(content, nexusResultRegex);
 			
 			for(int j=0; j<dataList.size(); j++){
 				
 				beforeData = processingData.extractDataNexus(dataList.get(j));
-				//beforeData.setCpuFrequency(Integer.parseInt(cpuFrequency.get(i)));
-				
+				beforeData.setCpuFrequency(Integer.parseInt(cpuFrequency.get(i)));
 				afterDataList.add(processingData.makeOutputFormat(beforeData));
+				
+				//perf
+				//beforeData = processingData.extractPerfResult(dataList.get(j));
+				//afterDataList.add(processingData.makeOutputPerfFormat(beforeData));
 				
 			}
 			
-			for(int j=0; j<afterDataList.size(); j++){
-				System.out.println(afterDataList.get(j));
-			}
-
 			for(int j=0; j < afterDataList.size(); j++){
 				writingFile.writeToFile(path, afterDataList.get(j), "cpufreq", cpuFrequency.get(i)+".txt");
 				writingFile.writeToFile(path, afterDataList.get(j), "devfreq", afterDataList.get(j).getDevFrequency() + ".txt");

@@ -29,12 +29,16 @@ public class WritingFile {
 			if("cpufreq".equals(directoryName)){
 				//fw.write(data.toStringSortedByDevFreq() + "\n");
 				//nexus
-				fw.write(data.toStringSortedByDevFreqNexus() + "\n");
+				fw.write(data.toStringSortedByDevFreqNexus() + "\r\n");
+				//perf
+				//fw.write(data.toStringSortedByDevFreqPerfNexus() + "\r\n");
 			}else if("devfreq".equals(directoryName)){
 				
 				//fw.write(data.toStringSotredByCpuFreq() + "\n");
 				//nexus
-				fw.write(data.toStringSotredByCpuFreq() + "\n");
+				fw.write(data.toStringSotredByCpuFreqNexus() + "\r\n");
+				//perf
+				//fw.write(data.toStringSotredByCpuFreqPerfNexus() + "\r\n");
 			}
 			
 			fw.flush();
